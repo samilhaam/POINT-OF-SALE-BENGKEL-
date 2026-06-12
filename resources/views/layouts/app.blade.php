@@ -3,115 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Kasir - SANDI JAYA MOTOR</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome untuk Ikon Menu yang Lebih Premium -->
+    <title>Sistem POS Bengkel Motor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body {
-            min-height: 100vh;
-            background-color: #f8f9fa;
-        }
-        /* Style untuk Sidebar Kiri */
-        .sidebar {
-            width: 280px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #212529; /* Gelap elegan */
-            z-index: 100;
-            padding-top: 20px;
-        }
-        /* Style untuk Area Konten Utama di Kanan */
-        .main-content {
-            margin-left: 280px; /* Jaraknya sama dengan lebar sidebar */
-            padding: 30px;
-            min-height: 100vh;
-        }
-        /* Desain Tombol Menu */
-        .nav-link {
-            color: rgba(255, 255, 255, 0.7) !important;
-            padding: 12px 20px !important;
-            margin: 5px 15px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        /* Efek Hover (Saat Disentuh Mouse) */
-        .nav-link:hover {
-            color: #fff !important;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-        /* Status Aktif Sesuai Halaman yang Dibuka */
-        .nav-link.active {
-            color: #fff !important;
-            background-color: #198754 !important; /* Warna hijau sukses */
-            box-shadow: 0 4px 10px rgba(25, 135, 84, 0.3);
-        }
-        .sidebar-brand {
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
+    @livewireStyles
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 flex h-screen overflow-hidden">
 
-    <div class="d-flex">
-        <!-- SIDEBAR NAVIGASI (KIRI) -->
-        <div class="sidebar d-flex flex-column flex-shrink-0 text-white shadow">
-            <div class="sidebar-brand text-center col-12">
-                <a href="{{ route('dashboard') }}" class="text-white text-decoration-none fw-bold">
-                     SANDI JAYA MOTOR
+    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col justify-between hidden md:flex z-20 shadow-xl">
+        <div>
+            <div class="h-16 flex items-center px-6 border-b border-slate-800 bg-slate-950">
+                <i class="fa-solid fa-motorcycle text-blue-500 text-2xl mr-3"></i>
+                <span class="font-bold text-lg text-white tracking-wide">BENGKEL-POS</span>
+            </div>
+
+            <nav class="p-4 space-y-1.5 overflow-y-auto">
+                <p class="text-xs font-bold text-slate-500 uppercase px-3 mb-2 tracking-wider">Menu Utama</p>
+                
+                <a href="/" class="flex items-center px-4 py-3 rounded-xl font-medium bg-blue-600 text-white shadow-lg shadow-blue-600/20 transition-all duration-200">
+                    <i class="fa-solid fa-cash-register w-6 text-lg"></i>
+                    <span>POS Kasir</span>
                 </a>
-            </div>
-            
-            <ul class="nav nav-pills flex-column mb-auto">
-                <!-- Menu Dashboard -->
-                <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <i class="fa-solid fa-gauge me-3"></i>Dashboard Utama
-                    </a>
-                </li>
-                <!-- Menu Stok Barang -->
-                <li>
-                    <a href="{{ route('barang.index') }}" class="nav-link {{ request()->routeIs('barang.*') ? 'active' : '' }}">
-                        <i class="fa-solid fa-boxes-stacked me-3"></i>Stok Barang
-                    </a>
-                </li>
-                <!-- Menu Kasir Transaksi -->
-                <li>
-                    <a href="{{ route('transaksi.index') }}" class="nav-link {{ request()->routeIs('transaksi.index') ? 'active' : '' }}">
-                        <i class="fa-solid fa-cash-register me-3"></i>Kasir Transaksi
-                    </a>
-                </li>
-                <!-- Menu Laporan Pendapatan -->
-                <li>
-                    <a href="{{ route('transaksi.laporan') }}" class="nav-link {{ request()->routeIs('transaksi.laporan') ? 'active' : '' }}">
-                        <i class="fa-solid fa-chart-line me-3"></i>Laporan Pendapatan
-                    </a>
-                </li>
-            </ul>
-            
-            <!-- Footer Kecil Sidebar -->
-            <div class="p-3 text-center border-top border-secondary text-muted small">
-                Sandi JAYA Motor &copy; 2026
-            </div>
+
+                <p class="text-xs font-bold text-slate-500 uppercase px-3 pt-4 mb-2 tracking-wider">Master Data</p>
+
+                <a href="#" class="flex items-center px-4 py-3 rounded-xl font-medium hover:bg-slate-800 hover:text-white transition group">
+                    <i class="fa-solid fa-box w-6 text-lg text-slate-400 group-hover:text-blue-400"></i>
+                    <span>Stok Sparepart</span>
+                </a>
+
+                <a href="#" class="flex items-center px-4 py-3 rounded-xl font-medium hover:bg-slate-800 hover:text-white transition group">
+                    <i class="fa-solid fa-wrench w-6 text-lg text-slate-400 group-hover:text-blue-400"></i>
+                    <span>Jasa Servis</span>
+                </a>
+
+                <a href="#" class="flex items-center px-4 py-3 rounded-xl font-medium hover:bg-slate-800 hover:text-white transition group">
+                    <i class="fa-solid fa-user-gear w-6 text-lg text-slate-400 group-hover:text-blue-400"></i>
+                    <span>Data Mekanik</span>
+                </a>
+
+                <p class="text-xs font-bold text-slate-500 uppercase px-3 pt-4 mb-2 tracking-wider">Laporan</p>
+
+                <a href="#" class="flex items-center px-4 py-3 rounded-xl font-medium hover:bg-slate-800 hover:text-white transition group">
+                    <i class="fa-solid fa-file-invoice-dollar w-6 text-lg text-slate-400 group-hover:text-blue-400"></i>
+                    <span>Riwayat Penjualan</span>
+                </a>
+            </nav>
         </div>
 
-        <!-- AREA KONTEN UTAMA (KANAN) -->
-        <div class="main-content flex-grow-1">
-            @yield('content')
+        <div class="p-4 border-t border-slate-800 bg-slate-950/50 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 font-bold">
+                    K
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-white leading-none">Kasir Toko</p>
+                    <span class="text-xs text-slate-500">Petugas Aktif</span>
+                </div>
+            </div>
+            <button class="text-slate-500 hover:text-red-400 p-1.5 rounded-lg transition">
+                <i class="fa-solid fa-right-from-bracket text-lg"></i>
+            </button>
         </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6 z-10 shrink-0">
+            <div class="flex items-center space-x-3">
+                <button class="md:hidden text-gray-500 p-1 rounded hover:bg-gray-100">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-lg font-bold text-gray-800">Sistem Kasir Bengkel</h1>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1.5 rounded-xl flex items-center">
+                    <i class="fa-regular fa-clock mr-2 text-blue-500"></i>
+                    <span>{{ date('d M Y') }}</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+            {{ $slot }}
+        </main>
+
     </div>
 
-    <!-- Bootstrap 5 Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @livewireScripts
 </body>
 </html>
